@@ -1,4 +1,4 @@
-ARG N_CPUS=12
+ARG N_CPUS=12 #Make sure to change this value according to the hardware that you're on! Max threads -1 is always a safe bet.
 FROM jeremybyu/realsense:latest
 ARG N_CPUS
 
