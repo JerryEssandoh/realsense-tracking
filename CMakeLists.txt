@@ -34,7 +34,8 @@ find_package(Protobuf REQUIRED)
 find_package(eCAL COMPONENTS core REQUIRED)
 find_package(OpenGL)
 find_package(gflags REQUIRED)
-find_package(glog) # Docker ubuntu can not find when REQUIRED, but logging still works?!?!?
+set(glog_DIR /opt/workspace/dk-x86_64-build/glog/build) #Set path for GLOG. Installation must be done ahead of time!
+find_package(glog REQUIRED PATHS ${CMAKE_SOURCE_DIR}/third_party/glog NO_DEFAULT_PATH)# Now Ubuntu should be able to find it.
 find_package(Eigen3 REQUIRED )
 find_package(Open3D HINTS ${CMAKE_INSTALL_PREFIX}/lib/CMake REQUIRED)
 
