@@ -105,7 +105,7 @@ Make a cmake `build` directory. I use:
 0. If using docker, enter into terminal shell
 1. `mkdir MY_BUILD_DIR && cd MY_BUILD_DIR`
 2. `cmake .. && cmake --build -j8`
-3. `cmake --build build` #Don't forget this step, you're cooked otherwise lol. You might also need to cd out of the build directory? Will update after I confirm.
+3. `cmake --build build` Don't forget this step, you're cooked otherwise lol. You might also need to cd out of the build directory? Will update after I confirm.
 
 
 ## Applications
@@ -236,3 +236,5 @@ Glog can be required during the CMAKE steps of the build! You just need to insta
 
 ### Open 3D Note
 Update the version used to v0.13.0 if choosing to build with Docker. It won't work with v0.12.0, and the patch file won't break if it's done.
+### credStore
+This is an awful bug that happens when you run the Dockerfile, occasionally. 
