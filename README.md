@@ -105,6 +105,7 @@ Make a cmake `build` directory. I use:
 0. If using docker, enter into terminal shell
 1. `mkdir MY_BUILD_DIR && cd MY_BUILD_DIR`
 2. `cmake .. && cmake --build -j8`
+3. `cmake --build build` #Don't forget this step, you're cooked otherwise lol. You might also need to cd out of the build directory? Will update after I confirm.
 
 
 ## Applications
