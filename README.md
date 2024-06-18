@@ -224,4 +224,14 @@ Cmp   Size  Command                                                             
      32 MB  apt-get install --no-install-recommends -y libgflags-dev libgoogle-glog-dev gfortran     drwxr-xr-x         0:0     4.6 MB          └─⊕ share   
 
 ```
+## Modern Issues 
+Here is a collection of some of the fixes I've implemented in running this repo in the year 2024. 
+### Prevent Compilation Errors During Build
+There are a couple of things to keep note of regarding appyling the software here to run between systems. To prevent compilation errors due to full memory, you must adjust the number of jobs to match (or go under) the available threads for the machine.
+Essentially, 'ARG N_CPUS=' is the number that must be adjusted. You can also have adjust the make statement at each step 'make j__' to adjust the number of threads used.
 
+### GLOG Fix
+Glog can be required during the CMAKE steps of the build! You just need to install it beforehand (add installation steps here in a bit) and then set the path to look for the built GLOG information. Works perfectly, but you can also just run the orignial code as is if you would like.
+
+### Open 3D Note
+Update the version used to v0.13.0 if choosing to build with Docker. It won't work with v0.12.0, and the patch file won't break if it's done.
