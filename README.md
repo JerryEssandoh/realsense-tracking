@@ -14,10 +14,10 @@ The purpose of this repository is to provide a reproducible (possibly isolated) 
 
 All dependencies and installation procedures can be found in `Docker/base/Dockerfile`. You can use docker and have everything taken care or you can follow the installation procedures in the file. Here is a basic summary of the environment:
 
-- Ubuntu Base Image 18.04
+- Ubuntu Base Image 20.04
 - Python 3 w/ Scipy, numpy
-- CMake 3.15.5 - Needed because realsense asks for 3.11 or higher.
-- Open CV 3.4.7 with user contributed modules
+- CMake 3.29.6 - Needed because realsense asks for 3.11 or higher.
+- Open CV 3.4.16 with user contributed modules
 - ECAL for marshalling and communication
 - Protobuf - Serialization format (Thinking of changing to Flatbuffers eventually)
 - RealSense SDK
