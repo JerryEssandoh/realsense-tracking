@@ -56,7 +56,7 @@ RUN apt-get install --no-install-recommends -y libeigen3-dev libblas-dev liblapa
 FROM base_install as cmake_install
 ARG N_CPUS
 # Install cmake - This takes like 30 minutes on emulated hardware...
-RUN wget -O /opt/cmake-3.29.6.tar.gz https://cmake.org/files/v3.18/cmake-3.29.6.tar.gz && \
+RUN wget -O /opt/cmake-3.29.6.tar.gz https://cmake.org/files/v3.29/cmake-3.29.6.tar.gz && \
     cd /opt && \
     tar -xzf cmake-3.29.6.tar.gz && \
     rm /opt/cmake-3.29.6.tar.gz && \
@@ -82,7 +82,7 @@ RUN git clone -b '3.4.16' --single-branch https://github.com/opencv/opencv.git /
 FROM opencv_install as ecal_install
 ARG N_CPUS
 # Prepare for ECAL - Shared Memory Marshalling and Communication
-RUN git clone --single-branch --branch v5.11.0 --recursive git://github.com/continental/ecal.git /opt/ecal && \
+RUN git clone --single-branch --branch v5.11.0 --recursive https://github.com/continental/ecal.git /opt/ecal && \
     cd /opt/ecal && mkdir build_ &&  cd build_ && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DECAL_THIRDPARTY_BUILD_PROTOBUF=OFF -DHAS_QT5=OFF -DBUILD_DOCS=OFF -DECAL_THIRDPARTY_BUILD_CURL=OFF -DECAL_THIRDPARTY_BUILD_HDF5=OFF -DECAL_THIRDPARTY_BUILD_TINYXML2=ON -DBUILD_PY_BINDING=ON && \
     make -j${N_CPUS} && \
@@ -130,7 +130,7 @@ ARG N_CPUS
 RUN apt-get install --no-install-recommends -y nano htop
 
 # Our Project Dependencies
-RUN apt-get install --no-install-recommends -y libgflags-dev libgoogle-glog-dev python3-scipy python3-matplotlib
+RUN apt-get install --no-install-recommends -y libgflags-dev libgoogle-glog-dev libunwind-dev python3-scipy python3-matplotlib
 RUN pip3 install protobuf
 
 ENV PYTHONPATH $PYTHONPATH:/usr/local/lib
