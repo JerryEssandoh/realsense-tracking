@@ -8,8 +8,8 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 
 SRC="."
-DST_COMP="jeremy@192.168.0.186"
-DST_FOLDER="/home/jeremy/Documents/UMICH/Research/realsense-tracking"
+DST_COMP="jakedev42_@172.30.60.117"
+DST_FOLDER="/home/jakedev42_/realsense-tracking"
 DST="$DST_COMP:$DST_FOLDER"
 echo "Attempting to sync $SRC with $DST"
 rsync -avz --include='**.gitignore' --filter='dir-merge,-n /.gitignore' $SRC $DST
