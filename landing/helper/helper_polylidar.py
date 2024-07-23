@@ -7,8 +7,8 @@ from shapely.geometry import asPolygon, Point, Polygon
 from polylidar.polylidarutil.plane_filtering import filter_planes
 from polylidar import MatrixDouble, Polylidar3D, MatrixUInt8
 
-from fastga import GaussianAccumulatorS2, MatX3d, IcoCharts
-from fastga.peak_and_cluster import find_peaks_from_ico_charts
+from fastgac import GaussianAccumulatorS2, MatX3d, IcoCharts
+from fastgac.peak_and_cluster import find_peaks_from_ico_charts
 
 from landing.helper.helper_logging import logger
 from landing.helper.helper_meshes import create_meshes, create_o3d_mesh_from_tri_mesh
@@ -71,7 +71,7 @@ def get_image_peaks(ico_chart, ga, level=2, find_peaks_kwargs=dict(
     t2 = time.perf_counter()
 
     elapsed_time = (t2 - t1) * 1000
-    timings = dict(t_fastga_peak=elapsed_time)
+    timings = dict(t_fastgac_peak=elapsed_time)
 
     logger.debug("Peak Detection - Took (ms): %.2f", (t2 - t1) * 1000)
 
@@ -106,12 +106,12 @@ def extract_all_dominant_plane_normals(tri_mesh, level=5, with_o3d=False, ga_=No
     avg_peaks, timings_dict = get_image_peaks(
         ico_chart, ga, level=level, with_o3d=with_o3d, **kwargs)
 
-    elapsed_time_fastga = (t2 - t1) * 1000
-    elapsed_time_peak = timings_dict['t_fastga_peak']
-    elapsed_time_total = elapsed_time_fastga + elapsed_time_peak
+    elapsed_time_fastgac = (t2 - t1) * 1000
+    elapsed_time_peak = timings_dict['t_fastgac_peak']
+    elapsed_time_total = elapsed_time_fastgac + elapsed_time_peak
 
-    timings = dict(t_fastga_total=elapsed_time_total,
-                   t_fastga_integrate=elapsed_time_fastga, t_fastga_peak=elapsed_time_peak)
+    timings = dict(t_fastgac_total=elapsed_time_total,
+                   t_fastgac_integrate=elapsed_time_fastgac, t_fastgac_peak=elapsed_time_peak)
 
     ga.clear_count()
     return avg_peaks, timings
@@ -207,11 +207,11 @@ def extract_polygons_from_points(opc, pl, ga, ico, config,
 
     # 2. Get dominant plane normals
     avg_peaks, timings = extract_all_dominant_plane_normals(
-        tri_mesh, ga_=ga, ico_chart_=ico, **config['fastga'])
+        tri_mesh, ga_=ga, ico_chart_=ico, **config['fastgac'])
     # only looking for most dominant plane of the rooftop
     avg_peaks = choose_dominant_plane_normal(avg_peaks, gravity_vector)
     alg_timings.update(timings)
-    logger.debug("FastGA found peaks: %s", avg_peaks)
+    logger.debug("fastgac found peaks: %s", avg_peaks)
     # 3. Extract Planes and Polygons, Filter, Simplify
     planes, triangle_sets, timings = extract_planes_and_polygons_from_mesh(tri_mesh, avg_peaks, pl_=pl,
                                                                            postprocess=config['polygon']['postprocess'], **kwargs)
@@ -243,11 +243,11 @@ def extract_polygons_from_tri_mesh(tri_mesh, pl, ga, ico, config,
 
     # 1. Get dominant plane normals
     avg_peaks, timings = extract_all_dominant_plane_normals(
-        tri_mesh, ga_=ga, ico_chart_=ico, **config['fastga'])
+        tri_mesh, ga_=ga, ico_chart_=ico, **config['fastgac'])
     # only looking for most dominant plane of the rooftop
     avg_peaks = choose_dominant_plane_normal(avg_peaks, gravity_vector)
     alg_timings.update(timings)
-    logger.debug("FastGA found peaks: %s", avg_peaks)
+    logger.debug("fastgac found peaks: %s", avg_peaks)
     # 3. Extract Planes and Polygons, Filter, Simplify
     planes, triangle_sets, timings = extract_planes_and_polygons_from_mesh(tri_mesh, avg_peaks, pl_=pl,
                                                                            postprocess=config['polygon']['postprocess'], **kwargs)
