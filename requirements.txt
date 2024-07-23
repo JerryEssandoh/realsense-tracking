@@ -1,5 +1,5 @@
 # USE CONDA TO INSTALL matplotlib, numpy and so forth.
-scipy==1.4.1
+scipy
 pybind11==2.4.3
 shapely
 open3d
