@@ -26,7 +26,7 @@ from TouchdownMessage_pb2 import TouchdownMessage, MeshAndTouchdownMessage
 
 
 from polylidar import Polylidar3D, MatrixDouble, MatrixFloat, extract_point_cloud_from_float_depth, bilateral_filter_normals
-from fastga import GaussianAccumulatorS2Beta, IcoCharts
+from fastgac import GaussianAccumulatorS2Beta, IcoCharts
 from landing.helper.helper_polylidar import extract_polygons_from_points, get_3D_touchdown_point, extract_polygons_from_tri_mesh
 from landing.helper.helper_utility import create_projection_matrix, create_transform, create_proto_vec, get_mesh_data_from_message, create_touchdown_message
 from landing.helper.o3d_util import create_o3d_pc, create_linemesh_from_shapely, get_segments
@@ -240,8 +240,8 @@ class LandingService(object):
         # Create Polylidar Objects
         config = self.config
         pl = Polylidar3D(**config['polylidar'])
-        ga = GaussianAccumulatorS2Beta(level=config['fastga']['level'])
-        ico = IcoCharts(level=config['fastga']['level'])
+        ga = GaussianAccumulatorS2Beta(level=config['fastgac']['level'])
+        ico = IcoCharts(level=config['fastgac']['level'])
 
         chosen_plane, alg_timings, tri_mesh, avg_peaks, _ = extract_polygons_from_tri_mesh(
             tri_mesh, pl, ga, ico, config)
@@ -488,8 +488,8 @@ def process_image(landing_service: LandingService, pull_queue: Queue, push_queue
 
     # Create Polylidar Objects
     pl = Polylidar3D(**config['polylidar'])
-    ga = GaussianAccumulatorS2Beta(level=config['fastga']['level'])
-    ico = IcoCharts(level=config['fastga']['level'])
+    ga = GaussianAccumulatorS2Beta(level=config['fastgac']['level'])
+    ico = IcoCharts(level=config['fastgac']['level'])
 
 
     while True:
