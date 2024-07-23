@@ -1,5 +1,5 @@
 name = "Save Settings"
-base_path = "data/realsense" # Base path to save data, will create subfolders
+base_path = "assets/data/realsense" # Base path to save data, will create subfolders
 
 # Only save data if sensor translation and rotation changed this much
 min_translate_change = 0.10 # meters
