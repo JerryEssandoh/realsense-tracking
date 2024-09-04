@@ -22,7 +22,7 @@ RUN pip install py_cui ipdb
 
 # Clone Polylidar3D
 RUN git clone -b 'landing' --single-branch --recursive https://github.com/JerryEssandoh/polylidar /opt/polylidar && \
-    cd /opt/polylidar && mkdir cmake-build && cd cmake-build && \
+    cd /opt/polylidar.git && mkdir cmake-build && cd cmake-build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DFETCHCONTENT_QUIET=OFF && \
     make -j${N_CPUS} && \
     cmake --build . --target python-package --config Release -j${N_CPUS} && \
