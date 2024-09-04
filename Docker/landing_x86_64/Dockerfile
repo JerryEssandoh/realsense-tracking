@@ -7,7 +7,7 @@ ENV PYTHONPATH $PYTHONPATH:/usr/local/lib
 
 # install packages
 RUN apt-get update && apt-get install -q -y \
-    python3-shapely \
+    python3-shapely==1.8.5 \
     python3-tk \
     parallel \
     python3-matplotlib
@@ -21,7 +21,7 @@ RUN pip install open3d==0.13.0
 RUN pip install py_cui ipdb
 
 # Clone Polylidar3D
-RUN git clone -b 'landing' --single-branch --recursive https://github.com/JeremyBYU/polylidar.git /opt/polylidar && \
+RUN git clone -b 'landing' --single-branch --recursive https://github.com/JerryEssandoh/polylidar /opt/polylidar && \
     cd /opt/polylidar && mkdir cmake-build && cd cmake-build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DFETCHCONTENT_QUIET=OFF && \
     make -j${N_CPUS} && \
