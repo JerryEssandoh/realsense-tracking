@@ -82,7 +82,7 @@ RUN git clone -b '3.4.16' --single-branch https://github.com/opencv/opencv.git /
 FROM opencv_install as ecal_install
 ARG N_CPUS
 # Prepare for ECAL - Shared Memory Marshalling and Communication
-RUN git clone --single-branch --branch v5.11.0 --recursive https://github.com/continental/ecal.git /opt/ecal && \
+RUN git clone --single-branch --branch v5.11.0 --recursive https://github.com/eclipse-ecal/ecal.git /opt/ecal && \
     cd /opt/ecal && mkdir build_ &&  cd build_ && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DECAL_THIRDPARTY_BUILD_PROTOBUF=OFF -DHAS_QT5=OFF -DBUILD_DOCS=OFF -DECAL_THIRDPARTY_BUILD_CURL=OFF -DECAL_THIRDPARTY_BUILD_HDF5=OFF -DECAL_THIRDPARTY_BUILD_TINYXML2=ON -DBUILD_PY_BINDING=ON && \
     make -j${N_CPUS} && \
